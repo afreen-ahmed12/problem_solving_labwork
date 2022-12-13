@@ -1,1 +1,448 @@
 
+PROGRAM-01
+#include<stdio.h>
+int checkPalindrome(int number)
+{
+  int temp, remainder, rev=0;
+  temp = number;
+
+  while( number!=0 )
+  {
+     remainder = number % 10;
+     rev = rev*10 + remainder;
+     number /= 10;
+  }
+
+  if ( rev == temp ) return 0;
+  else return 1;
+}
+
+int main()
+{
+  int number;
+
+  printf("Enter the number: ");
+  scanf("%d", &number);
+
+  if(checkPalindrome(number) == 0)
+  printf("%d is a palindrome number.\n",number);
+  else
+  printf("%d is not a palindrome number.\n",number);
+
+  return 0;
+}
+
+
+PROGRAM-02
+#include < stdio.h >  
+#include < conio.h >  
+#include < sdtlib >  
+#define N 10  
+main ( ) {  
+   int i , j , n ;  
+   float median , a [ N ] , t ;  
+   printf ( " ?nter the number of items \ n " ) ;  
+   scanf ( " % d " , & n ) ;  
+   /* Reading items into array a */  
+   printf ( " Input % d values \ n " , n ) ;  
+   for ( i = 1 ; i < = n ; i + + )  
+   scanf ( " % f " , & a [ i ] ) ;  
+   /* Sorting begins */  
+   for ( i = 1 ; i < = n - 1 ; i + + ) { / * Trip - i begins * /  
+      for ( j = 1 ; j < = n - i ; j + + ) {  
+         if ( a [ j ] < = a [ j + 1 ] ) { / * Interchanging values * /  
+            t = a [ j ] ;  
+            a [ j ] = a [ j + 1 ] ;  
+            a [ j + 1 ] = t ;  
+         }  
+         else  
+         continue ;  
+      }  
+   } / * sorting ends * /  
+   / * calculation of median * /  
+   if ( n % 2 = = 0 )  
+      median = ( a [ n / 2 ] + a [ n / 2 + 1 ] ) / 2.0 ;  
+   else  
+   median = a [ n / 2 + 1 ] ;  
+   / * Printing * /  
+   for ( i = 1 ; i < = n ; i + + )  
+   printf ( " % f " , a [ i ] ) ;  
+   printf ( " \ n \ n Median is % f \ n " , median ) ;  
+}  
+
+PROGRAM-03
+#include<stdio.h>
+
+//function that will return factorial
+//this function will be executed recursively 
+int factorial( int n, int fact )
+{
+	if ( n==1 )
+		return fact;
+	else
+		factorial( n-1, n*fact );
+}
+
+//main function to test above function
+int main( ){
+	int n,value;
+	
+	//input an integer number 
+	printf( "Enter the number : " );
+	scanf( "%d", &n );
+	
+	if ( n < 0 )
+		printf( "No factorial of negative number\n" );
+	else if ( n==0 )
+			printf( "Factorial of  zero is 1\n" );
+	else
+	{
+		value = factorial( n,1 ); /* Function for factorial of number */
+		printf( "Factorial of %d = %d\n",n,value );
+	}
+
+	return 0;
+}
+
+
+
+PROGRAM-04
+
+#include <stdio.h>
+int isPerfect(int num);
+void printPerfect(int start, int end);
+
+
+
+int main()
+{
+    int start, end;
+    printf("Enter lower limit to print perfect numbers: ");
+    scanf("%d", &start);
+    printf("Enter upper limit to print perfect numbers: ");
+    scanf("%d", &end);
+    printf("All perfect numbers between %d to %d are: \n", start, end);
+    printPerfect(start, end);
+    
+    return 0;
+}
+
+
+int isPerfect(int num)
+{
+    int i, sum;
+    
+    /* Finds sum of all proper divisors */
+    sum = 0;
+    for(i=1; i<num; i++)
+    {
+        if(num % i == 0)
+        {
+            sum += i;
+        }
+    }
+
+  
+    if(sum == num)
+        return 1;
+    else
+        return 0;
+}
+
+void printPerfect(int start, int end)
+{
+    /* Iterates from start to end */
+    while(start <= end)
+    {
+        if(isPerfect(start))
+        {
+            printf("%d, ", start);
+        }
+        
+        start++;
+    }   
+}
+
+PROGRAM-05
+#include <stdio.h>
+int checkPrimeNumber(int n);
+int main() {
+
+  int n1, n2, i, flag;
+
+  printf("Enter two positive integers: ");
+  scanf("%d %d", &n1, &n2);
+
+  // swap n1 and n2 if n1 > n2
+  if (n1 > n2) {
+    n1 = n1 + n2;
+    n2 = n1 - n2;
+    n1 = n1 - n2;
+  }
+
+  printf("Prime numbers between %d and %d are: ", n1, n2);
+  for (i = n1 + 1; i < n2; ++i) {
+
+    // flag will be equal to 1 if i is prime
+    flag = checkPrimeNumber(i);
+
+    if (flag == 1) {
+      printf("%d ", i);
+    }
+  }
+  
+  return 0;
+}
+
+// user-defined function to check prime number
+int checkPrimeNumber(int n) {
+  int j, flag = 1;
+
+  for (j = 2; j <= n / 2; ++j) {
+
+    if (n % j == 0) {
+      flag = 0;
+      break;
+    }
+  }
+
+  return flag;
+}
+
+
+PROGRAM-06
+ 
+#include <stdio.h>
+
+/* Function declarations */ 
+int isArmstrong(int num);
+void printArmstrong(int start, int end);
+
+
+
+int main()
+{
+    int start, end;
+    
+    /* Input lower and upper limit to of armstrong numbers */
+    printf("Enter lower limit to print armstrong numbers: ");
+    scanf("%d", &start);
+    printf("Enter upper limit to print armstrong numbers: ");
+    scanf("%d", &end);
+    
+    printf("All armstrong numbers between %d to %d are: \n", start, end);
+    printArmstrong(start, end);
+    
+    return 0;
+}
+int isArmstrong(int num)
+{
+    int temp, lastDigit, sum;
+    
+    temp = num;
+    sum = 0;
+    
+    while(temp != 0)
+    {
+        lastDigit = temp % 10;
+        sum += lastDigit * lastDigit * lastDigit;
+        temp /= 10;
+    }
+    if(num == sum)
+        return 1;
+    else 
+        return 0;
+}
+void printArmstrong(int start, int end)
+{
+    while(start <= end)
+    {
+        if(isArmstrong(start)) 
+        {
+            printf("%d, ", start);
+        }
+        
+        start++;
+    }
+}
+
+
+
+PROGRAM-07
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// Store the factorial of all the
+// digits from [0, 9]
+int factorial[] = { 1, 1, 2, 6, 24, 120,
+					720, 5040, 40320, 362880 };
+
+bool isStrong(int N)
+{
+	
+
+	string num = to_string(N);
+
+
+	int sum = 0;
+
+	for(int i = 0; i < num.length(); i++)
+	{
+		sum += factorial[num[i] - '0'];
+	}
+	return sum == N;
+}
+void printStrongNumbers(int N)
+{
+	
+	// Iterating from 1 to N
+	for(int i = 1; i <= N; i++)
+	{
+		
+		// Checking if a number is
+		// strong then print it
+		if (isStrong(i))
+		{
+			cout << i << " ";
+		}
+	}
+}
+
+
+PROGRAM-08
+#include <stdio.h>
+int hcf(int n1, int n2);
+int main() {
+    int n1, n2;
+    printf("Enter two positive integers: ");
+    scanf("%d %d", &n1, &n2);
+    printf("G.C.D of %d and %d is %d.", n1, n2, hcf(n1, n2));
+    return 0;
+}
+
+int hcf(int n1, int n2) {
+    if (n2 != 0)
+        return hcf(n2, n1 % n2);
+    else
+        return n1;
+}
+
+
+PROGRAM-09
+#include <stdio.h>
+
+int lcm(int n1, int n2) {
+    static int lowestcm = 1;    
+    if(lowestcm%n1 == 0 && lowestcm%n2 == 0)
+    {
+        return lowestcm;
+    }
+    else
+    {
+        lowestcm++;
+        lcm(n1,n2);
+        return lowestcm;
+    }
+}
+
+
+int main() {
+    int n1 = 4, n2 = 8;
+    printf("L.C.M of %d and %d is %d.", n1, n2, lcm(n1, n2));
+    return 0;
+}
+
+PROGRAM-10
+#include <stdio.h>
+int power(int n1, int n2);
+int main() {
+    int base, a, result;
+    printf("Enter base number: ");
+    scanf("%d", &base);
+    printf("Enter power number(positive integer): ");
+    scanf("%d", &a);
+    result = power(base, a);
+    printf("%d^%d = %d", base, a, result);
+    return 0;
+}
+
+int power(int base, int a) {
+    if (a != 0)
+        return (base * power(base, a - 1));
+    else
+        return 1;
+}
+
+
+PROGRAM-11
+#include <bits/stdc++.h>
+using namespace std
+int main()
+unsigned long int factorial(unsigned int n)
+{
+	unsigned long int res = 1;
+
+	// Calculate value of [1*(2)*---*(n-k+1)] / [k*(k-1)*---*1]
+	for (int i = 1; i <= n; ++i)
+	{
+		res *= i;
+	}
+
+	return res;
+}
+
+unsigned long int binomialCoeff(unsigned int n, unsigned int k)
+{
+	unsigned long int res = 1;
+
+	// Since C(n, k) = C(n, n-k)
+	if (k > n - k)
+		k = n - k;
+
+	// Calculate value of [n*(n-1)*---*(n-k+1)] / [k*(k-1)*---*1]
+	for (int i = 0; i < k; ++i)
+	{
+		res *= (n - i);
+		res /= (i + 1);
+	}
+
+	return res;
+}
+unsigned long int catalan(unsigned int n)
+{
+	// Calculate value of 2nCn
+	unsigned long int c = binomialCoeff(2*n, n);
+
+	// return 2nCn/(n+1)
+	return c/(n+1);
+}
+
+unsigned long int countBST(unsigned int n)
+{
+	// find nth catalan number
+	unsigned long int count = catalan(n);
+
+	// return nth catalan number
+	return count;
+}
+unsigned long int countBT(unsigned int n)
+{
+	
+	unsigned long int count = catalan(n);
+	return count * factorial(n);
+}
+{
+
+	int count1,count2, n = 5;
+
+	// find count of BST and binary trees with n nodes
+		count1 = countBST(n);
+		count2 = countBT(n);
+	
+	// print count of BST and binary trees with n nodes
+	cout<<"Count of BST with "<<n<<" nodes is "<<count1<<endl;
+		cout<<"Count of binary trees with "<<n<<" nodes is "<<count2;
+
+	return 0;
+}
