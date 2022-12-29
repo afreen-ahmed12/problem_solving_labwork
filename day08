@@ -1,1 +1,257 @@
+PROGRAM -01
 
+#include <math.h>
+#include <stdio.h>
+int main() {
+    double a, b, c, discriminant, root1, root2, realPart, imagPart;
+    printf("Enter coefficients a, b and c: ");
+    scanf("%lf %lf %lf", &a, &b, &c);
+
+    discriminant = b * b - 4 * a * c;
+
+    // condition for real and different roots
+    if (discriminant > 0) {
+        root1 = (-b + sqrt(discriminant)) / (2 * a);
+        root2 = (-b - sqrt(discriminant)) / (2 * a);
+        printf("root1 = %.2lf and root2 = %.2lf", root1, root2);
+    }
+
+    // condition for real and equal roots
+    else if (discriminant == 0) {
+        root1 = root2 = -b / (2 * a);
+        printf("root1 = root2 = %.2lf;", root1);
+    }
+
+    // if roots are not real
+    else {
+        realPart = -b / (2 * a);
+        imagPart = sqrt(-discriminant) / (2 * a);
+        printf("root1 = %.2lf+%.2lfi and root2 = %.2f-%.2fi", realPart, imagPart, realPart, imagPart);
+    }
+
+    return 0;
+} 
+
+
+PROGRAM -02
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int kthdigit(int a, int b, int k)
+{
+	int p = pow(a, b);
+
+	int count = 0;
+	while (p > 0 && count < k) {
+		int rem = p % 10;
+		count++;
+		if (count == k)
+			return rem;
+		p = p / 10;
+	}
+
+	return 0;
+}
+
+
+
+PROGRAM-03
+
+#include <stdio.h>
+
+static int addDigits(int num) {
+        return num - (num - 1) / 9 * 9;
+    }
+
+int main(void)
+{
+    int n = 12;
+    printf("\nInitial number is %d, Single digit number is %d.", n, addDigits(n));
+    n = 47;
+    printf("\n\nInitial number is %d, Single digit number is %d.", n, addDigits(n));
+    return 0;
+}
+
+
+
+PROGRAM-04
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+void BalancedNumber(string s)
+{
+	int Leftsum = 0;
+	int Rightsum = 0;
+
+	// Calculating the Leftsum
+	// and rightSum simultaneously
+	for (int i = 0; i < s.size() / 2; i++) {
+
+		// Typecasting each character
+		// to integer and adding the
+		// digit to respective sums
+		Leftsum += int(s[i] - '0');
+		Rightsum += int(s[s.size() - 1 - i]
+						- '0');
+	}
+
+	if (Leftsum == Rightsum)
+		cout << "Balanced" << endl;
+	else
+		cout << "Not Balanced" << endl;
+}
+	string s = "12321";
+
+
+	BalancedNumber(s);
+
+	return 0;
+}
+
+
+PROGRAM 05
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+void leastPrimeFactor(int n)
+{
+	
+	vector<int> least_prime(n+1, 0);
+
+
+	least_prime[1] = 1;
+
+	for (int i = 2; i <= n; i++)
+	{
+	
+		if (least_prime[i] == 0)
+		{
+			
+			least_prime[i] = i;
+
+			
+			for (int j = i*i; j <= n; j += i)
+				if (least_prime[j] == 0)
+				least_prime[j] = i;
+		}
+	}
+
+	
+	for (int i = 1; i <= n; i++)
+		cout << "Least Prime factor of "
+			<< i << ": " << least_prime[i] << "\n";
+}
+	int n = 10;
+	leastPrimeFactor(n);
+	return 0;
+}
+
+PROGRAM -06
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+
+float rectanglearea(float r)
+{
+
+	
+	if (r < 0)
+		return -1;
+
+
+	float a = r * r;
+
+	return a;
+}
+	float r = 5;
+	cout << rectanglearea(r) << endl;
+	return 0;
+}
+
+
+
+PROGRAM -07
+
+
+#include <math.h>
+#include <stdio.h>
+int main()
+{
+void primeFactors(int n)
+{
+
+	while (n % 2 == 0) {
+		printf("%d ", 2);
+		n = n / 2;
+	}
+
+	
+	for (int i = 3; i <= sqrt(n); i = i + 2) {
+		
+		while (n % i == 0) {
+			printf("%d ", i);
+			n = n / i;
+		}
+	}
+
+	
+	if (n > 2)
+		printf("%d ", n);
+}
+
+
+{
+	int n = 315;
+	primeFactors(n);
+	return 0;
+}
+
+
+
+PROGRAM-08
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+
+int minCoins(int coins[], int m, int V)
+{
+
+if (V == 0) return 0;
+
+
+int res = INT_MAX;
+
+
+for (int i=0; i<m; i++)
+{
+	if (coins[i] <= V)
+	{
+		int sub_res = minCoins(coins, m, V-coins[i]);
+		if (sub_res != INT_MAX && sub_res + 1 < res)
+			res = sub_res + 1;
+	}
+}
+return res;
+}
+	int coins[] = {9, 6, 5, 1};
+	int m = sizeof(coins)/sizeof(coins[0]);
+	int V = 11;
+	cout << "Minimum coins required is "
+		<< minCoins(coins, m, V);
+	return 0;
+}
